@@ -57,37 +57,50 @@ public class RaStrictCounterTransitivity extends RankingPostulate {
 			return true;
 		
 		DungTheory dt = new DungTheory((DungTheory) kb);
-		Iterator<Argument> it = dt.iterator();
-		Argument a = it.next();
-		Argument b = it.next();
-		Set<Argument> attackersA = dt.getAttackers(a);
-		Set<Argument> attackersB = dt.getAttackers(b);
+		//Iterator<Argument> it = dt.iterator();
+		//Argument a = it.next();
+		//Argument b = it.next();
 
-		if (attackersB.size() < attackersA.size())
-			return true;
+		for(Argument a: dt) {
+			for (Argument b : dt) {
+				if (a == b)
+					continue;
 
-		Set<Argument> toRemove = new HashSet<Argument>();
-		GeneralComparator<Argument, DungTheory> ranking = ev.getModel(dt);
-		boolean strictFlag = false;
-		for (Argument ax : attackersA) {
-			boolean flag = false;
-			Set<Argument> tempSet = new HashSet<Argument>(attackersB);
-			tempSet.removeAll(toRemove);
-			for (Argument bx : tempSet) {
-				if (ranking.isStrictlyMoreAcceptableThan(bx, ax))
-					strictFlag = true;
-				if (ranking.isStrictlyMoreOrEquallyAcceptableThan(bx, ax)) {
-					flag = true;
-					toRemove.add(bx);
-					break;
+				Set<Argument> attackersA = dt.getAttackers(a);
+				Set<Argument> attackersB = dt.getAttackers(b);
+
+				if (attackersB.size() < attackersA.size())
+					continue; //return true;
+
+				Set<Argument> toRemove = new HashSet<Argument>();
+				GeneralComparator<Argument, DungTheory> ranking = ev.getModel(dt);
+				boolean strictFlag = false;
+				for (Argument ax : attackersA) {
+					boolean flag = false;
+					Set<Argument> tempSet = new HashSet<Argument>(attackersB);
+					tempSet.removeAll(toRemove);
+					for (Argument bx : tempSet) {
+						if (ranking.isStrictlyMoreAcceptableThan(bx, ax))
+							strictFlag = true;
+						if (ranking.isStrictlyMoreOrEquallyAcceptableThan(bx, ax)) {
+							flag = true;
+							toRemove.add(bx);
+							break;
+						}
+					}
+					if (!flag)
+						break; //return true;
+				}
+
+				if ((attackersA.size() < attackersB.size()) || strictFlag) {
+					if (!ranking.isStrictlyMoreAcceptableThan(a, b)) {
+						System.out.println(a + " is not strictly more acceptable than " + b);
+						return false;
+					}
+					//return ranking.isStrictlyMoreAcceptableThan(a, b);
 				}
 			}
-			if (!flag)
-				return true;
 		}
-
-		if ((attackersA.size() < attackersB.size()) || strictFlag)
-			return ranking.isStrictlyMoreAcceptableThan(a, b);
 		return true;
 	}
 

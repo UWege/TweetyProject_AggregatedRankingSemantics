@@ -30,16 +30,13 @@ import org.tweetyproject.arg.dung.syntax.Argument;
 import org.tweetyproject.arg.dung.syntax.DungTheory;
 import org.tweetyproject.comparator.NumericalPartialOrder;
 import org.tweetyproject.commons.util.SetTools;
+import org.tweetyproject.graphs.Graph;
 import org.tweetyproject.math.equation.Equation;
 import org.tweetyproject.math.equation.Inequation;
+import org.tweetyproject.math.equation.Statement;
 import org.tweetyproject.math.opt.problem.OptimizationProblem;
 import org.tweetyproject.math.opt.solver.ApacheCommonsSimplex;
-import org.tweetyproject.math.term.FloatConstant;
-import org.tweetyproject.math.term.FloatVariable;
-import org.tweetyproject.math.term.Product;
-import org.tweetyproject.math.term.Sum;
-import org.tweetyproject.math.term.Term;
-import org.tweetyproject.math.term.Variable;
+import org.tweetyproject.math.term.*;
 
 /**
  * This class implements the argument ranking approach of [Matt, Toni. A
@@ -63,9 +60,17 @@ public class StrategyBasedRankingReasoner extends AbstractRankingReasoner<Numeri
 	public NumericalPartialOrder<Argument, DungTheory> getModel(DungTheory kb) {
 		NumericalPartialOrder<Argument, DungTheory> ranking = new NumericalPartialOrder<Argument, DungTheory>();
 		ranking.setSortingType(NumericalPartialOrder.SortingType.DESCENDING);
-		Set<Set<Argument>> subsets = new SetTools<Argument>().subsets(((DungTheory)kb).getNodes());
-		for (Argument a : ((DungTheory)kb)) 
-			ranking.put(a, computeStrengthOfArgument(a, ((DungTheory)kb), subsets)); 
+		/*
+		 * The strength of an argument depends on its connected component only.
+		 * For a better performance they are computed for each connected component of the Graph
+		 * (Argumentation Framework) separately.
+		 */
+		for(Collection<Argument> comp : kb.getConnectedComponents()){
+			Set<Set<Argument>> subsets = new SetTools<Argument>().subsets(comp);
+			for (Argument a : comp) {
+				ranking.put(a, computeStrengthOfArgument(a, (DungTheory) kb, subsets));
+			}
+		}
 		return ranking;
 	}
 
@@ -120,12 +125,15 @@ public class StrategyBasedRankingReasoner extends AbstractRankingReasoner<Numeri
 		problem.add(new Equation(new Sum(probabilityVariables), new FloatConstant(1.0)));
 
 		/*
-		 * Solve problem with simplex algorithm
+		 * Solve problem with simplex algorithm and check if all constraints are satisfied within an error
 		 */
-		ApacheCommonsSimplex solver = new ApacheCommonsSimplex(true);
+		ApacheCommonsSimplex solver = new ApacheCommonsSimplex(50000,0.00001,true);
 		try {
 			Map<Variable, Term> solution = solver.solve(problem);
-			return solution.get(targetVar).doubleValue();
+			if(!checkConstraints(0.0001, problem, solution))
+				throw new Exception("The solution is not correct, since not all constraints are satisfied. Please try to run the StrategyBasedRankingReasoner with a lower value of the precision for the Simplex algorithm.");
+			else
+				return solution.get(targetVar).doubleValue();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -175,7 +183,29 @@ public class StrategyBasedRankingReasoner extends AbstractRankingReasoner<Numeri
 		result -= 1.0 - (1.0 / (attacksFromBtoA + 1.0));
 		return 0.5 * result;
 	}
-	
+
+	/**
+	 * Check whether the equations and inequations in the linear program are satisfied within an error of "err"
+	 *
+	 * @param err allowed error
+	 * @param problem the optimization problem with its constraints
+	 * @param solution the solution to be checked
+	 */
+	public boolean checkConstraints(double err, OptimizationProblem problem, Map<Variable, Term> solution){
+		for (OptProbElement s : problem) {
+			if (s instanceof Inequation || s instanceof Equation) {
+				Statement s1 = ((Statement) s).replaceAllTerms(solution);
+				Statement s2 = s1.toLinearForm();
+				if (s instanceof Equation && Math.abs(s1.getLeftTerm().doubleValue() - s1.getRightTerm().doubleValue()) > err)
+					return false;
+				else if (((Statement) s).getRelationSymbol().equals(">=") && s1.getLeftTerm().doubleValue() + err < s1.getRightTerm().doubleValue())
+					return false;
+
+			}
+		}
+		return true;
+	}
+
 	/**natively installed*/
 	@Override
 	public boolean isInstalled() {

@@ -49,8 +49,8 @@ public class RaCounterTransitivity extends RankingPostulate {
 		return (kb instanceof DungTheory && kb.size() >= 2);
 	}
 
-	@Override
-	public boolean isSatisfied(Collection<Argument> kb, AbstractRankingReasoner<GeneralComparator<Argument, DungTheory>> ev) {
+	//@Override
+	public boolean isSatisfied2(Collection<Argument> kb, AbstractRankingReasoner<GeneralComparator<Argument, DungTheory>> ev) {
 		if (!this.isApplicable(kb))
 			return true;
 		if (ev.getModel((DungTheory) kb) == null)
@@ -82,8 +82,64 @@ public class RaCounterTransitivity extends RankingPostulate {
 			if (!flag)
 				return true;
 		}
-
+		if (!ranking.isStrictlyMoreOrEquallyAcceptableThan(a, b)){
+			System.out.println(a+" is not strictly more or equally acceptable than "+b);
+		}
 		return ranking.isStrictlyMoreOrEquallyAcceptableThan(a, b);
+	}
+
+	@Override
+	public boolean isSatisfied(Collection<Argument> kb, AbstractRankingReasoner<GeneralComparator<Argument, DungTheory>> ev) {
+		if (!this.isApplicable(kb))
+			return true;
+		if (ev.getModel((DungTheory) kb) == null)
+			return true;
+
+		DungTheory dt = new DungTheory((DungTheory) kb);
+		//Iterator<Argument> it = dt.iterator();
+		//Iterator<Argument> it2 = dt.iterator();
+
+		//Argument a = it.next();
+		//Argument b = it2.next();
+
+		for(Argument a: dt){
+			for(Argument b: dt){
+				if(a==b)
+					continue;
+			//System.out.println("Argument a: " + a + " b: " + b);
+			Set<Argument> attackersA = dt.getAttackers(a);
+			Set<Argument> attackersB = dt.getAttackers(b);
+
+			if (!(attackersB.size() < attackersA.size())) {
+				Set<Argument> toRemove = new HashSet<Argument>();
+				GeneralComparator<Argument, DungTheory> ranking = ev.getModel(dt);
+				boolean flag = false;
+				for (Argument ax : attackersA) {
+					flag = false;
+					Set<Argument> tempSet = new HashSet<Argument>(attackersB);
+					tempSet.removeAll(toRemove);
+					for (Argument bx : tempSet) {
+						if (ranking.isStrictlyMoreOrEquallyAcceptableThan(bx, ax)) {
+							flag = true;
+							toRemove.add(bx);
+							break;
+						}
+					}
+					if (!flag)
+						break; //return true;
+				}
+
+				if (flag && !ranking.isStrictlyMoreOrEquallyAcceptableThan(a, b)) {
+					System.out.println(a + " is not strictly more or equally acceptable than " + b);
+					return ranking.isStrictlyMoreOrEquallyAcceptableThan(a, b);
+				}
+			}
+
+			a = b;
+		}
+		}
+		//System.out.println("all good");
+		return true;
 	}
 
 

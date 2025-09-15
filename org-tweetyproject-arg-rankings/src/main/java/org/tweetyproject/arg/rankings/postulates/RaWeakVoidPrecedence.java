@@ -18,26 +18,23 @@
  */
 package org.tweetyproject.arg.rankings.postulates;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import org.tweetyproject.arg.dung.syntax.Argument;
 import org.tweetyproject.arg.dung.syntax.DungTheory;
 import org.tweetyproject.arg.rankings.reasoner.AbstractRankingReasoner;
 import org.tweetyproject.comparator.GeneralComparator;
 
+import java.util.Collection;
+
 /**
- * The "void precedence" postulate for ranking semantics as proposed by [Amgoud,
- * Ben-Naim. Ranking-based semantics for argumentation frameworks. 2013]: A
- * non-attacked argument is ranked strictly higher than any attacked argument.
- * 
- * @author Anna Gessler
+ * "weak void precedence" postulate for ranking semantics
+ *
+ * @author Ulla Wege
  */
-public class RaVoidPrecedence extends RankingPostulate {
+public class RaWeakVoidPrecedence extends RankingPostulate {
 
 	@Override
 	public String getName() {
-		return "Void Precedence";
+		return "Weak Void Precedence";
 	}
 
 	@Override
@@ -57,7 +54,7 @@ public class RaVoidPrecedence extends RankingPostulate {
 		for(Argument a: kb){
 			for(Argument b: kb) {
 				GeneralComparator<Argument, DungTheory> ranking = ev.getModel((DungTheory) dt);
-				if (dt.getAttackers(a).isEmpty() && !dt.getAttackers(b).isEmpty() && ranking.isStrictlyLessOrEquallyAcceptableThan(a, b))
+				if (dt.getAttackers(a).isEmpty() && !dt.getAttackers(b).isEmpty() && ranking.isStrictlyLessAcceptableThan(a, b))
 					return false;
 			}
 		}
@@ -66,5 +63,5 @@ public class RaVoidPrecedence extends RankingPostulate {
 
 
     /** Default Constructor */
-    public RaVoidPrecedence(){}
+    public RaWeakVoidPrecedence(){}
 }

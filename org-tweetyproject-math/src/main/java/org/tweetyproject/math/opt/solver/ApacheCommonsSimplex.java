@@ -76,7 +76,7 @@ public class ApacheCommonsSimplex extends Solver {
 	}
 	
 	/** Constructor 
-	 * @param precision  Whether only positive solutions are allowed.
+	 * @param restrictToNonNegative Whether only positive solutions are allowed.
 	 */
 	public ApacheCommonsSimplex(boolean restrictToNonNegative) {
 		this(50000,0.01,restrictToNonNegative);

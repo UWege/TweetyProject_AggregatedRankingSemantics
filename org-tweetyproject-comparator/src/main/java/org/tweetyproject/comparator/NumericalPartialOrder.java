@@ -20,10 +20,9 @@ package org.tweetyproject.comparator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.tweetyproject.commons.BeliefBase;
 import org.tweetyproject.commons.Formula;
@@ -301,5 +300,27 @@ public class NumericalPartialOrder<T extends Formula, R extends BeliefBase> exte
 	@Override
 	public boolean satisfies(R beliefBase) throws IllegalArgumentException {
 		return false;
+	}
+
+	public void printOrder() {
+		Collection<T> args = this.objectToValue.keySet();
+		Collection<T> current;
+		while(!args.isEmpty()){
+			current = getMaximallyAcceptedArguments((Collection<T>) args);
+			System.out.print(current.toString()+">");
+			((Collection<T>) args).removeAll(current);
+		}
+		System.out.print("\n");
+
+
+		/*Map<Integer, String> sortedMap =
+				this.objectToValue.entrySet().stream()
+						.sorted(Entry
+						.comparingByValue())
+						.collect(Collectors.toMap(Entry::getKey, Entry::getValue,
+								(e1, e2) -> e1, LinkedHashMap::new));
+		*/
+		//this.objectToValue.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).forEach((key, value) -> System.out.print("Key : " + key + " Value : " + value));
+		//return s;
 	}
 }
