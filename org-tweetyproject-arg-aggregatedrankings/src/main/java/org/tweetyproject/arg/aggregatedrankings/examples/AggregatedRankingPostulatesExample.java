@@ -6,8 +6,10 @@ import org.tweetyproject.arg.aggregatedrankings.reasoner.AggregatedPluralityVoti
 
 import org.tweetyproject.arg.aggregatedrankings.reasoner.RankingCache;
 import org.tweetyproject.arg.dung.syntax.Argument;
+import org.tweetyproject.arg.dung.syntax.Attack;
 import org.tweetyproject.arg.dung.syntax.DungTheory;
 import org.tweetyproject.arg.dung.util.DungTheoryGenerator;
+import org.tweetyproject.arg.dung.util.EnumeratingDilationGenerator;
 import org.tweetyproject.arg.dung.util.EnumeratingDungTheoryGenerator;
 import org.tweetyproject.arg.rankings.postulates.RankingPostulate;
 import org.tweetyproject.arg.rankings.reasoner.*;
@@ -42,21 +44,21 @@ public class AggregatedRankingPostulatesExample {
             //all_postulates.add(RankingPostulate.ADDITIONOFDEFENSEBRANCH);
             //all_postulates.add(RankingPostulate.ATTACKVSFULLDEFENSE);
             //all_postulates.add(RankingPostulate.CARDINALITYPRECEDENCE);
-            //all_postulates.add(RankingPostulate.COUNTERTRANSITIVITY);
+            all_postulates.add(RankingPostulate.COUNTERTRANSITIVITY);
             //all_postulates.add(RankingPostulate.DEFENSEPRECEDENCE);
             //all_postulates.add(RankingPostulate.DISTDEFENSEPRECEDENCE);
             //all_postulates.add(RankingPostulate.INCREASEOFATTACKBRANCH);
             //all_postulates.add(RankingPostulate.INCREASEOFDEFENSEBRANCH);
             //all_postulates.add(RankingPostulate.INDEPENDENCE);
             //all_postulates.add(RankingPostulate.NONATTACKEDEQUIVALENCE);
-            all_postulates.add(RankingPostulate.QUALITYPRECEDENCE);
+            //all_postulates.add(RankingPostulate.QUALITYPRECEDENCE);
             //all_postulates.add(RankingPostulate.SELFCONTRADICTION);
             //all_postulates.add(RankingPostulate.STRICTADDITIONOFDEFENSEBRANCH);
             //all_postulates.add(RankingPostulate.STRICTCOUNTERTRANSITIVITY);
             //all_postulates.add(RankingPostulate.TOTAL);
             //all_postulates.add(RankingPostulate.VOIDPRECEDENCE);
             //all_postulates.add(RankingPostulate.WEAKVOIDPRECEDENCE);
-            //all_postulates.add(RankingPostulate.ORDINALEQUIVALENCE);
+            all_postulates.add(RankingPostulate.ORDINALEQUIVALENCE);
 
             //CategorizerExample();
             //BurdenExample();
@@ -72,45 +74,31 @@ public class AggregatedRankingPostulatesExample {
             DiscussionBasedRankingReasoner dbs = new DiscussionBasedRankingReasoner();
             BurdenBasedRankingReasoner bbs = new BurdenBasedRankingReasoner();
             StrategyBasedRankingReasoner strat = new StrategyBasedRankingReasoner();
-            PropagationRankingReasoner propa2 = new PropagationRankingReasoner(0.75, false,
-                    PropagationRankingReasoner.PropagationSemantics.PROPAGATION2);
+            PropagationRankingReasoner propa2 = new PropagationRankingReasoner(0.75, false, PropagationRankingReasoner.PropagationSemantics.PROPAGATION2);
             PropagationRankingReasoner propa2m = new PropagationRankingReasoner(0.75, true, PropagationRankingReasoner.PropagationSemantics.PROPAGATION2);
-
-            mbsCB mbs = new mbsCB();
-            tbsCB tbs = new tbsCB();
-            isCB is = new isCB();
-
-            SyntaxRankingReasoner syn = new SyntaxRankingReasoner();
-
             CountingRankingReasoner count = new CountingRankingReasoner();
-            //System.out.println("propagation example..");
-            //PropagationExample();
 
             //List<AbstractRankingReasoner<?>> reasoners = List.of(cat, dbs, syn);
             //List<AbstractRankingReasoner<?>> reasoners = List.of(cat, dbs, count);
-            List<AbstractRankingReasoner<?>> reasoners = List.of(mbs, tbs, is);
+            List<AbstractRankingReasoner<?>> reasoners = List.of(cat, dbs);
+            //List<AbstractRankingReasoner<?>> reasoners = List.of(cat, dbs, bbs, strat);
+
+
+            //CategorizerExample();
+            //DiscussionExample();
+            //BurdenExample();
+            //StrategyBasedExample();
 
             RankingCache rankingCache = new RankingCache();
             //aggregatedPluralityExample(reasoners, rankingCache);
-            //aggregatedCopelandExample(reasoners, rankingCache, 1);
+            //kaggregatedCopelandExample(reasoners, rankingCache, 1);
             //aggregatedBordaExample(reasoners, rankingCache, 1);
 
-            aggregatedCopelandExample(reasoners, rankingCache, 0.5);
-            aggregatedBordaExample(reasoners, rankingCache, 0.5);
+            //aggregatedCopelandExample(reasoners, rankingCache, 0.5);
+            //aggregatedBordaExample(reasoners, rankingCache, 0.5);
 
             aggregatedCopelandExample(reasoners, rankingCache, 0);
             aggregatedBordaExample(reasoners, rankingCache, 0);
-
-
-            aggregatedCopelandExample(reasoners, null, 1);
-            aggregatedBordaExample(reasoners, null, 1);
-
-            //aggregatedCopelandExample(reasoners, null, 0.5);
-            //aggregatedBordaExample(reasoners, null, 0.5);
-            //aggregatedCopelandExample(reasoners, null, 0);
-
-            //aggregatedCopelandExample(reasoners, null, 0);
-            //aggregatedBordaExample(reasoners, null, 0.5);
 
             //StrategyBasedExample();
 
@@ -168,7 +156,7 @@ public class AggregatedRankingPostulatesExample {
             PostulateEvaluator<Argument, DungTheory> evaluator = new PostulateEvaluator<>(dg,
                     new StrategyBasedRankingReasoner());
             evaluator.addAllPostulates(all_postulates);
-            System.out.println(evaluator.evaluate(100, false).prettyPrint());
+            System.out.println(evaluator.evaluate(1000, true).prettyPrint());
         }
 
         /**
@@ -221,10 +209,11 @@ public class AggregatedRankingPostulatesExample {
             PostulateEvaluator<Argument, DungTheory> evaluator = new PostulateEvaluator<>(dg,
                     new AggregatedPluralityVotingRanking(reasoners, rankingCache));
             evaluator.addAllPostulates(all_postulates);
-            System.out.println(evaluator.evaluate(10000, true).prettyPrint());
+            System.out.println(evaluator.evaluate(350000, true).prettyPrint());
         }
 
         public static void aggregatedCopelandExample(List<AbstractRankingReasoner<?>> reasoners, RankingCache rankingCache, double alpha) {
+
             DungTheoryGenerator dg = new EnumeratingDungTheoryGenerator();
             PostulateEvaluator<Argument, DungTheory> evaluator;
             if(rankingCache==null){
@@ -235,11 +224,36 @@ public class AggregatedRankingPostulatesExample {
                         new AggregatedCopelandVotingRanking(reasoners, rankingCache, alpha));
             }
             evaluator.addAllPostulates(all_postulates);
-            System.out.println(evaluator.evaluate(300000, true).prettyPrint());
+            System.out.println(evaluator.evaluate(350000, true).prettyPrint());
         }
 
         public static void aggregatedBordaExample(List<AbstractRankingReasoner<?>> reasoners, RankingCache rankingCache, double alpha) {
-            DungTheoryGenerator dg = new EnumeratingDungTheoryGenerator();
+            Argument a = new Argument("a");
+            Argument b = new Argument("b");
+            Argument c = new Argument("c");
+            Argument d = new Argument("d");
+            Argument e = new Argument("e");
+
+            Argument a0 = new Argument("a0");
+            Argument a1 = new Argument("a1");
+            Argument a2 = new Argument("a2");
+            Argument a3 = new Argument("a3");
+            Argument a4 = new Argument("a4");
+            Argument a5 = new Argument("a5");
+            DungTheory exCT_T = new DungTheory();
+            exCT_T.add(a,b,c,d,e);
+            exCT_T.add(new Attack(b,a), new Attack(b,b),new Attack(b,d),new Attack(c,a),new Attack(c,d),new Attack(d,a),new Attack(d,c),new Attack(d,d),new Attack(e,b),new Attack(e,c));
+
+
+            DungTheory exSCT_Borda = new DungTheory();
+            exSCT_Borda.add(a1, a, a2, b, a3, c, a4, d, a5, e, a0);
+            exSCT_Borda.add(new Attack(b,a3), new Attack(b,a4), new Attack(a1,a5), new Attack(a4,a), new Attack(c,a4), new Attack(a0,a), new Attack(a0,b), new Attack(a5,a), new Attack(a5,b), new Attack(d,a5), new Attack(a1,c), new Attack(a1,d), new Attack(b,a0), new Attack(a1,a0));
+
+
+            DungTheoryGenerator dg = new EnumeratingDilationGenerator(exSCT_Borda);
+            //DungTheoryGenerator dg = new EnumeratingDungTheoryGenerator();
+
+            //DungTheoryGenerator dg = new EnumeratingDungTheoryGenerator();
             PostulateEvaluator<Argument, DungTheory> evaluator;
             if(rankingCache==null){
                 evaluator = new PostulateEvaluator<>(dg,
@@ -251,7 +265,7 @@ public class AggregatedRankingPostulatesExample {
             //PostulateEvaluator<Argument, DungTheory> evaluator = new PostulateEvaluator<>(dg,
             //        new AggregatedBordaVotingRanking(reasoners, rankingCache, alpha));
             evaluator.addAllPostulates(all_postulates);
-            System.out.println(evaluator.evaluate(300000, true).prettyPrint());
+            System.out.println(evaluator.evaluate(350000, true).prettyPrint());
         }
 
 

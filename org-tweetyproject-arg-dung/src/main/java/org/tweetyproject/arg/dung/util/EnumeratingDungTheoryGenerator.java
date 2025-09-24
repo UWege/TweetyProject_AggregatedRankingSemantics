@@ -31,14 +31,14 @@ import org.tweetyproject.arg.dung.syntax.DungTheory;
 /**
  * This generator generators all possible Dung argumentation theories.
  * It starts with the argumentation frameworks just consisting of one
- * arguments and then increases their size.
+ * argument and then increases their size.
  *
  * @author Matthias Thimm
  */
 public class EnumeratingDungTheoryGenerator implements DungTheoryGenerator {
 
 	/** The size of the currently generated theories. */
-	private int currentSize = 1;
+	private int currentSize =4;
 	/** used to enumerate all possible attack combinations. */
 	protected BitSet attacks = null;
 	/**The set of possible attacks. */

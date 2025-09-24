@@ -58,7 +58,7 @@ public class AggregatedPluralityVotingRanking extends Voting {
         GeneralComparator<Argument, DungTheory> model;
 
         for (AbstractRankingReasoner<?> reasoner : reasoners) {
-            //if (model != null) { //Tuples gibt voll oft 0 aus als model!
+            //if (model != null) {
             // Only the "best" arguments with no other argument better get a point for each reasoner
             model = rankingCache.getRanking(reasoner, arguments);
             int points = 1;
@@ -96,7 +96,7 @@ public class AggregatedPluralityVotingRanking extends Voting {
         GeneralComparator<Argument, DungTheory> model;
         for (AbstractRankingReasoner<?> reasoner : reasoners) {
             model = rankingCache.getRanking(reasoner, arguments);
-            if (model == null) //Tuples gibt voll oft 0 aus als model!
+            if (model == null)
                 return null;
             // Only the "best" arguments with no other argument better get a point for each reasoner
             int points = 1;
@@ -116,19 +116,6 @@ public class AggregatedPluralityVotingRanking extends Voting {
             }
 
         }
-
-
-        //das wieder löschen!
-        /*System.out.println("Plurality: " +ranking.toString());
-        System.out.println(arguments.toString());
-        ranking.printOrder();
-        for (AbstractRankingReasoner<?> reasoner : reasoners) {
-            model = rankingCache.getRanking(reasoner, arguments);
-            System.out.println(reasoner.getClass()+": "+model.toString());
-        }
-        System.out.println("\n");
-*/
-
         return ranking;
     }
 }

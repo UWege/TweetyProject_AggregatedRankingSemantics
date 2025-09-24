@@ -50,11 +50,6 @@ public class AggregatedBordaVotingRanking extends Voting {
         this.alpha = alpha;
     }
 
-
-    //public void setAlpha(double newAlpha) {
-    //    this.alpha = newAlpha;
-    //}
-
     @Override
     public boolean isInstalled() {
         return false;
@@ -130,17 +125,6 @@ public class AggregatedBordaVotingRanking extends Voting {
 
         }
 
-        /*
-        //das wieder löschen!
-        System.out.println("Borda "+alpha +" :" +ranking.toString());
-        System.out.println(arguments.toString());
-        ranking.printOrder();
-        for (AbstractRankingReasoner<?> reasoner : reasoners) {
-            model = rankingCache.getRanking(reasoner, arguments);
-            System.out.println(reasoner.getClass()+": "+model.toString());
-        }
-        System.out.println("\n");
-*/
         return ranking;
     }
 }

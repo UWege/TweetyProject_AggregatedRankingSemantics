@@ -15,7 +15,7 @@ public class CounterexamplesPluralitytransferability {
 
     public static void main(String[] args) {
             Argument a = new Argument("a");
-            Argument a0 = new Argument("a0");
+        Argument a0 = new Argument("a0");
             Argument a1 = new Argument("a1");
             Argument a2 = new Argument("a2");
         Argument a3 = new Argument("a3");
@@ -55,7 +55,7 @@ public class CounterexamplesPluralitytransferability {
             plur_CopeAbs.add(new Attack(a, b), new Attack(a, c));
             plur_CopeAbs.add(new Attack(a, a), new Attack(b, c));
 
-            //Counterex independence for counting semantics:
+            //Counterex Independence for counting semantics:
         DungTheory in_CS = new DungTheory();
         in_CS.add(a,b,c,d);
         in_CS.add(new Attack(a,a),new Attack(a,b),new Attack(b,a),new Attack(c,b),new Attack(c,d));
@@ -119,6 +119,12 @@ public class CounterexamplesPluralitytransferability {
         AvsFD_C.add(new Attack(c,e),new Attack(d,f),new Attack(e,g),new Attack(f,g));
         AvsFD_C.add(new Attack(x,a1),new Attack(y,a2),new Attack(a1,z1),new Attack(a1,z2),new Attack(a1,z3),new Attack(a1,z4),new Attack(a1,z5));
 
+        DungTheory AvsFD_C_2 = new DungTheory();
+        AvsFD_C_2.add(a,b,c,d,e,f,g,h,i,j);
+        AvsFD_C_2.add(new Attack(b,a));
+        AvsFD_C_2.add(new Attack(c,e),new Attack(d,f),new Attack(e,g),new Attack(f,g));
+        AvsFD_C_2.add(new Attack(j,h),new Attack(i,h));
+
         DungTheory AvsFD_B_t = new DungTheory();
         AvsFD_B_t.add(a,b,c,d,e,f,g,h,i);
         AvsFD_B_t.add(new Attack(b,a));
@@ -158,7 +164,11 @@ public class CounterexamplesPluralitytransferability {
         System.out.println(dbs.getModel(AvsFD_C).toString());
         System.out.println(bbs.getModel(AvsFD_C).toString());
         System.out.println(cat.getModel(AvsFD_C).toString());
-
+        System.out.println("AvsFD_C_2:");
+        strat.getModel(AvsFD_C_2).printOrder();
+        System.out.println(dbs.getModel(AvsFD_C_2).toString());
+        System.out.println(bbs.getModel(AvsFD_C_2).toString());
+        cat.getModel(AvsFD_C_2).printOrder();
         System.out.println("strat DDP_ex_Amgoud:");
         System.out.println(strat.getModel(DDP_ex_Amgoud).toString());
         strat.getModel(DDP_ex_Amgoud).printOrder();
@@ -193,11 +203,6 @@ public class CounterexamplesPluralitytransferability {
         System.out.println(cat.getModel(wVP_B).toString());
         System.out.println(dbs.getModel(wVP_B).toString());
 
-        //count.getModel(in_CS).printOrder();
-        //System.out.println(count.getModel(in_CS).toString());
-        //    count.getModel(in_CS1).printOrder();
-        //System.out.println(count.getModel(in_CS1).toString());
-
             List<AbstractRankingReasoner<?>> reasoners = List.of(cat, dbs, bbs, strat);
             List<AbstractRankingReasoner<?>> reasoners2 = List.of(cat, strat);
 
@@ -216,13 +221,16 @@ public class CounterexamplesPluralitytransferability {
             AggregatedPluralityVotingRanking aggPlur2 = new AggregatedPluralityVotingRanking(reasoners2,rankingCache1);
             AggregatedCopelandVotingRanking aggCope2 = new AggregatedCopelandVotingRanking(reasoners2, rankingCache1);
             AggregatedBordaVotingRanking aggBorda2 = new AggregatedBordaVotingRanking(reasoners2, rankingCache1);
-            //System.out.println(aggCope2.getModel(plur_CopeAbs).toString());
-            //System.out.println(aggBorda2.getModel(plur_CopeAbs).toString());
+
 
         RankingCache rankingCache2 = new RankingCache();
         AggregatedBordaVotingRanking aggBorda30 = new AggregatedBordaVotingRanking(reasoners3,rankingCache2,0);
         AggregatedBordaVotingRanking aggBorda31 = new AggregatedBordaVotingRanking(reasoners3,rankingCache2, 1);
         AggregatedBordaVotingRanking aggBorda312 = new AggregatedBordaVotingRanking(reasoners3,rankingCache2, 0.5);
+        AggregatedBordaVotingRanking aggBorda313 = new AggregatedBordaVotingRanking(reasoners3,rankingCache2, 0.3333333333);
+        AggregatedBordaVotingRanking aggBorda313up = new AggregatedBordaVotingRanking(reasoners3,rankingCache2, 0.34);
+        AggregatedBordaVotingRanking aggBorda313down = new AggregatedBordaVotingRanking(reasoners3,rankingCache2, 0.32);
+
 
         RankingCache rankingCache4 = new RankingCache();
         AggregatedBordaVotingRanking aggBorda40 = new AggregatedBordaVotingRanking(reasoners4,rankingCache4,0);
@@ -244,16 +252,25 @@ public class CounterexamplesPluralitytransferability {
 
         aggBorda312.getModel(in_CS1).printOrder();
         aggBorda312.getModel(in_CS).printOrder();
+
+        aggBorda313.getModel(in_CS1).printOrder();
+        aggBorda313.getModel(in_CS).printOrder();
+
+        aggBorda313up.getModel(in_CS1).printOrder();
+        aggBorda313up.getModel(in_CS).printOrder();
+
+        aggBorda313down.getModel(in_CS1).printOrder();
+        aggBorda313down.getModel(in_CS).printOrder();
         rankingCache2.prettyPrint();
 
         System.out.println("In CS Copeland:");
         AggregatedCopelandVotingRanking aggCope3 = new AggregatedCopelandVotingRanking(reasoners3,rankingCache2);
-    aggCope3.getModel(in_CS1).printOrder();
-    aggCope3.getModel(in_CS).printOrder();
+        aggCope3.getModel(in_CS1).printOrder();
+        aggCope3.getModel(in_CS).printOrder();
 
         RankingCache rankingCache3 = new RankingCache();
         System.out.println("plur");
-    AggregatedPluralityVotingRanking aggPlur3 = new AggregatedPluralityVotingRanking(reasoners3, rankingCache3);
+        AggregatedPluralityVotingRanking aggPlur3 = new AggregatedPluralityVotingRanking(reasoners3, rankingCache3);
         aggPlur3.getModel(in_1).printOrder();
         aggPlur3.getModel(in_2).printOrder();
         rankingCache3.prettyPrint();

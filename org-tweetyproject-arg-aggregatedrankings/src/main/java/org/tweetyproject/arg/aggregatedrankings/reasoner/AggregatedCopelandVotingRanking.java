@@ -156,20 +156,6 @@ public class AggregatedCopelandVotingRanking extends Voting {
             ranking.put(argList.get(i), score[i]);
         }
 
-
-        //das wieder löschen!
-        /*System.out.println("Copeland "+alpha+" :" +ranking.toString());
-        System.out.println(arguments.toString());
-        ranking.printOrder();
-        for (AbstractRankingReasoner<?> reasoner : reasoners) {
-            //if (model != null) { //Tuples gibt voll oft 0 aus als model!
-            // Only the "best" arguments with no other argument better get a point for each reasoner
-            model = rankingCache.getRanking(reasoner, arguments);
-            System.out.println(reasoner.getClass()+": "+model.toString());
-        }
-        System.out.println("\n");
-
-         */
         return ranking;
     }
 }
