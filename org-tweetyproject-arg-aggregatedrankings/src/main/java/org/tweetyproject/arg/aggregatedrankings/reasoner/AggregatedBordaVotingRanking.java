@@ -22,7 +22,6 @@ import org.tweetyproject.arg.dung.syntax.Argument;
 import org.tweetyproject.arg.dung.syntax.DungTheory;
 import org.tweetyproject.arg.rankings.reasoner.AbstractRankingReasoner;
 import org.tweetyproject.comparator.GeneralComparator;
-import org.tweetyproject.comparator.LatticePartialOrder;
 import org.tweetyproject.comparator.NumericalPartialOrder;
 
 import java.util.Collection;
@@ -42,7 +41,7 @@ public class AggregatedBordaVotingRanking extends Voting {
     }
 
     public AggregatedBordaVotingRanking(List<AbstractRankingReasoner<?>> reasoners, RankingCache rankingCash) {
-        super(reasoners,rankingCash);
+        super(reasoners, rankingCash);
     }
 
     public AggregatedBordaVotingRanking(List<AbstractRankingReasoner<?>> reasoners, RankingCache rankingCash, double alpha) {
@@ -69,7 +68,7 @@ public class AggregatedBordaVotingRanking extends Voting {
             agg_ranking.put(a, 0.0);
         }
 
-        for (GeneralComparator<Argument,DungTheory> model : rankings) {
+        for (GeneralComparator<Argument, DungTheory> model : rankings) {
             // Each argument gets a point whenever it is strictly more acceptable than another argument;
             // it gets alpha points, if it is equally acceptable than another argument
             double points;
@@ -101,10 +100,10 @@ public class AggregatedBordaVotingRanking extends Voting {
             ranking.put(a, 0.0);
         }
 
-        GeneralComparator<Argument,DungTheory> model;
+        GeneralComparator<Argument, DungTheory> model;
         for (AbstractRankingReasoner<?> reasoner : reasoners) {
             model = rankingCache.getRanking(reasoner, arguments);//model = reasoner.getModel(arguments);
-            if(model == null)
+            if (model == null)
                 return null;
             // Each argument gets a point whenever it is strictly more acceptable than another argument;
             // it gets alpha points, if it is equally acceptable than another argument

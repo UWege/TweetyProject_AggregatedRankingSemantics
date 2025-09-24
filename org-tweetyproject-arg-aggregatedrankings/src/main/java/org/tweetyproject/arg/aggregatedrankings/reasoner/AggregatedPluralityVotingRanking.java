@@ -34,7 +34,7 @@ public class AggregatedPluralityVotingRanking extends Voting {
     }
 
     public AggregatedPluralityVotingRanking(List<AbstractRankingReasoner<?>> reasoners, RankingCache rankingCash) {
-        super(reasoners,rankingCash);
+        super(reasoners, rankingCash);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class AggregatedPluralityVotingRanking extends Voting {
                 }
 
                 if (points != 0)
-                    ranking.put(a, ranking.get(a)+1.0);
+                    ranking.put(a, ranking.get(a) + 1.0);
             }
 
         }

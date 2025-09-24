@@ -42,11 +42,11 @@ public class AggregatedCopelandVotingRanking extends Voting {
     }
 
     public AggregatedCopelandVotingRanking(List<AbstractRankingReasoner<?>> reasoners, RankingCache rankingCash) {
-        super(reasoners,rankingCash);
+        super(reasoners, rankingCash);
     }
 
     public AggregatedCopelandVotingRanking(List<AbstractRankingReasoner<?>> reasoners, RankingCache rankingCash, double alpha) {
-        super(reasoners,rankingCash);
+        super(reasoners, rankingCash);
         this.alpha = alpha;
     }
 
@@ -128,7 +128,7 @@ public class AggregatedCopelandVotingRanking extends Voting {
                 // compare Arguments i and j in each Ranking
                 for (AbstractRankingReasoner<?> reasoner : reasoners) {
                     model = rankingCache.getRanking(reasoner, arguments);
-                    if(model == null)
+                    if (model == null)
                         return null;
                     if (model.isStrictlyMoreAcceptableThan(ai, aj)) {
                         aggi += 1;

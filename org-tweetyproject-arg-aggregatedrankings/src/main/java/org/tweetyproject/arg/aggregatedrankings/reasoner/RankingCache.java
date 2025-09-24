@@ -5,19 +5,18 @@ import org.tweetyproject.arg.dung.syntax.DungTheory;
 import org.tweetyproject.arg.rankings.reasoner.AbstractRankingReasoner;
 import org.tweetyproject.commons.util.Pair;
 import org.tweetyproject.comparator.GeneralComparator;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RankingCache {
 
-    Map<Pair<AbstractRankingReasoner<?>,DungTheory>, GeneralComparator<Argument,DungTheory>> rankingCache = new HashMap<>();
+    Map<Pair<AbstractRankingReasoner<?>, DungTheory>, GeneralComparator<Argument, DungTheory>> rankingCache = new HashMap<>();
 
-    public GeneralComparator<Argument,DungTheory> getRanking(AbstractRankingReasoner<?> reasoner, DungTheory dt){
-        Pair<AbstractRankingReasoner<?>,DungTheory> pair = new Pair<>(reasoner,dt);
-        GeneralComparator<Argument,DungTheory> model = rankingCache.get(pair);
-        if(model==null) {
+    public GeneralComparator<Argument, DungTheory> getRanking(AbstractRankingReasoner<?> reasoner, DungTheory dt) {
+        Pair<AbstractRankingReasoner<?>, DungTheory> pair = new Pair<>(reasoner, dt);
+        GeneralComparator<Argument, DungTheory> model = rankingCache.get(pair);
+        if (model == null) {
             model = reasoner.getModel(dt);
             rankingCache.put(pair, model);
         }
@@ -25,8 +24,8 @@ public class RankingCache {
     }
 
 
-    public void prettyPrint(){
+    public void prettyPrint() {
         String s = new String("ranking Cache:");
-        rankingCache.forEach((k, v) -> System.out.println(k+": "+v));
+        rankingCache.forEach((k, v) -> System.out.println(k + ": " + v));
     }
 }

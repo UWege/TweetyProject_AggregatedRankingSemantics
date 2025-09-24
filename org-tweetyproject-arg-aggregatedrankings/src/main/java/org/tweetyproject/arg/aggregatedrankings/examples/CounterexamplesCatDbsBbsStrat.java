@@ -7,7 +7,6 @@ import org.tweetyproject.arg.aggregatedrankings.reasoner.RankingCache;
 import org.tweetyproject.arg.dung.syntax.Argument;
 import org.tweetyproject.arg.dung.syntax.Attack;
 import org.tweetyproject.arg.dung.syntax.DungTheory;
-import org.tweetyproject.arg.rankings.postulates.RankingPostulate;
 import org.tweetyproject.arg.rankings.reasoner.*;
 
 import java.util.List;
@@ -81,14 +80,13 @@ public class CounterexamplesCatDbsBbsStrat {
 
         // Counterexample for Borda:
         DungTheory exInBorda = new DungTheory();
-        exInBorda.add(a,b,c,d,e,f);
-        exInBorda.add(new Attack(a,c),new Attack(a,d),new Attack(b,b),new Attack(b,c),new Attack(b,d),new Attack(c,a),new Attack(d,a));
-        exInBorda.add(new Attack(e,f));
+        exInBorda.add(a, b, c, d, e, f);
+        exInBorda.add(new Attack(a, c), new Attack(a, d), new Attack(b, b), new Attack(b, c), new Attack(b, d), new Attack(c, a), new Attack(d, a));
+        exInBorda.add(new Attack(e, f));
 
         DungTheory exInBorda1 = new DungTheory();
-        exInBorda1.add(a,b,c,d);
-        exInBorda1.add(new Attack(a,c),new Attack(a,d),new Attack(b,b),new Attack(b,c),new Attack(b,d),new Attack(c,a),new Attack(d,a));
-
+        exInBorda1.add(a, b, c, d);
+        exInBorda1.add(new Attack(a, c), new Attack(a, d), new Attack(b, b), new Attack(b, c), new Attack(b, d), new Attack(c, a), new Attack(d, a));
 
 
         // Cardinality-precedence:
@@ -110,42 +108,42 @@ public class CounterexamplesCatDbsBbsStrat {
         // Counter-transitivity:
         // Counterexample for Plurality, Copeland and Borda: *
         DungTheory exCT = new DungTheory();
-        exCT.add(a,b);
-        exCT.add(new Attack(a,a),new Attack(a,b));
+        exCT.add(a, b);
+        exCT.add(new Attack(a, a), new Attack(a, b));
 
 
         // Strict Counter-transitivity:
         // Counterexample for Plurality(?), Copeland and Borda: *
         DungTheory exSCT = new DungTheory();
-        exSCT.add(a,b,c);
-        exSCT.add(new Attack(a,a),new Attack(a,b),new Attack(b,c));
+        exSCT.add(a, b, c);
+        exSCT.add(new Attack(a, a), new Attack(a, b), new Attack(b, c));
 
 
         // Self-Contradiction:
         // Counterexample for Plurality(?), Copeland and Borda: *
         DungTheory exSC = new DungTheory();
-        exSC.add(a,b,c);
-        exSC.add(new Attack(a,a),new Attack(b,c));
+        exSC.add(a, b, c);
+        exSC.add(new Attack(a, a), new Attack(b, c));
 
 
         // sigma-Compatibility:
         // Counterexample ? for:
         DungTheory exsComp = new DungTheory();
-        exsComp.add(a,b,c,d);
-        exsComp.add(new Attack(a,b),new Attack(a,c),new Attack(b,d),new Attack(c,d));
+        exsComp.add(a, b, c, d);
+        exsComp.add(new Attack(a, b), new Attack(a, c), new Attack(b, d), new Attack(c, d));
 
 
         // Quality-Precedence:
         // Counterexample for Plurality, Copeland and Borda: *
         DungTheory exQP = new DungTheory();
-        exQP.add(a,b,c);
-        exQP.add(new Attack(a,a),new Attack(a,b),new Attack(b,a),new Attack(c,b),new Attack(c,c));
+        exQP.add(a, b, c);
+        exQP.add(new Attack(a, a), new Attack(a, b), new Attack(b, a), new Attack(c, b), new Attack(c, c));
 
 
         //Attack vs Full Defense
         DungTheory exAvsFD = new DungTheory();
-        exAvsFD.add(a,b,c,d);
-        exAvsFD.add(new Attack(a,b),new Attack(a,c),new Attack(b,d),new Attack(c,d));
+        exAvsFD.add(a, b, c, d);
+        exAvsFD.add(new Attack(a, b), new Attack(a, c), new Attack(b, d), new Attack(c, d));
 
 
         DungTheory exAvsDF1 = new DungTheory();
@@ -167,8 +165,8 @@ public class CounterexamplesCatDbsBbsStrat {
         exAvsDF3.add(new Attack(b1, b));
 
         DungTheory exAvsDF4 = new DungTheory();
-        exAvsDF4.add(a,b,b1,c);
-        exAvsDF4.add(new Attack(b,a),new Attack(b1,a),new Attack(c,b),new Attack(c,b1));
+        exAvsDF4.add(a, b, b1, c);
+        exAvsDF4.add(new Attack(b, a), new Attack(b1, a), new Attack(c, b), new Attack(c, b1));
 
 
         // ---------------
@@ -177,8 +175,8 @@ public class CounterexamplesCatDbsBbsStrat {
         // Void-Precedence:
         // Counterex ? with serializable --- nope!
         DungTheory exVP = new DungTheory();
-        exVP.add(a,b,c);
-        exVP.add(new Attack(b,c),new Attack(c,b));
+        exVP.add(a, b, c);
+        exVP.add(new Attack(b, c), new Attack(c, b));
 
         // Beispiel für starke Gegentransitivität für Priority Voting
         DungTheory exCT1 = new DungTheory();
@@ -187,8 +185,8 @@ public class CounterexamplesCatDbsBbsStrat {
         exCT1.add(new Attack(c, b));
         // Test CT/SCT?
         DungTheory exCT2 = new DungTheory();
-        exCT2.add(a,a1,a2,a3,a4,a5);
-        exCT2.add(new Attack(a,a1),new Attack(a1,a2),new Attack(a2,a3),new Attack(a3,a4),new Attack(a4,a5));
+        exCT2.add(a, a1, a2, a3, a4, a5);
+        exCT2.add(new Attack(a, a1), new Attack(a1, a2), new Attack(a2, a3), new Attack(a3, a4), new Attack(a4, a5));
 
 
         //Gegenbsp Void precedence PriorityVoting ?
@@ -210,8 +208,6 @@ public class CounterexamplesCatDbsBbsStrat {
         plur_CopeAbs.add(a, b, c);
         plur_CopeAbs.add(new Attack(a, b), new Attack(a, c));
         plur_CopeAbs.add(new Attack(a, a), new Attack(b, c));
-
-
 
 
         Argument b0 = new Argument("b0");
@@ -249,19 +245,19 @@ public class CounterexamplesCatDbsBbsStrat {
         //create a rankingCache to calculate the rankings of the used ranking semantics just once for each argumentation graph
         RankingCache rankingCache = new RankingCache();
         //aggregation semantics for plurality, Borda and Copeland over the four ranking semantics
-        AggregatedPluralityVotingRanking aggPlur = new AggregatedPluralityVotingRanking(reasoners,rankingCache);
-        AggregatedBordaVotingRanking aggBorda1 = new AggregatedBordaVotingRanking(reasoners,rankingCache,1);
-        AggregatedBordaVotingRanking aggBorda05 = new AggregatedBordaVotingRanking(reasoners,rankingCache,0.5);
-        AggregatedBordaVotingRanking aggBorda0 = new AggregatedBordaVotingRanking(reasoners,rankingCache,0);
-        AggregatedCopelandVotingRanking aggCopeland1 = new AggregatedCopelandVotingRanking(reasoners,rankingCache,  1);
-        AggregatedCopelandVotingRanking aggCopeland05 = new AggregatedCopelandVotingRanking(reasoners,rankingCache,  0.5);
-        AggregatedCopelandVotingRanking aggCopeland0 = new AggregatedCopelandVotingRanking(reasoners,rankingCache,  0);
+        AggregatedPluralityVotingRanking aggPlur = new AggregatedPluralityVotingRanking(reasoners, rankingCache);
+        AggregatedBordaVotingRanking aggBorda1 = new AggregatedBordaVotingRanking(reasoners, rankingCache, 1);
+        AggregatedBordaVotingRanking aggBorda05 = new AggregatedBordaVotingRanking(reasoners, rankingCache, 0.5);
+        AggregatedBordaVotingRanking aggBorda0 = new AggregatedBordaVotingRanking(reasoners, rankingCache, 0);
+        AggregatedCopelandVotingRanking aggCopeland1 = new AggregatedCopelandVotingRanking(reasoners, rankingCache, 1);
+        AggregatedCopelandVotingRanking aggCopeland05 = new AggregatedCopelandVotingRanking(reasoners, rankingCache, 0.5);
+        AggregatedCopelandVotingRanking aggCopeland0 = new AggregatedCopelandVotingRanking(reasoners, rankingCache, 0);
 
 
         //Print Counterexamples:
         System.out.println("Independence:");
         System.out.println("Counterexample for Independence for plurality-aggregated semantics");
-        System.out.println("Argumentation Framework: "+ex1InPV.toString());
+        System.out.println("Argumentation Framework: " + ex1InPV.toString());
         System.out.println(aggPlur.getModel(ex1InPV).toString());
         aggPlur.getModel(ex1InPV).printOrder();
         System.out.println(aggPlur.getModel(ex2InPV).toString());
@@ -271,35 +267,35 @@ public class CounterexamplesCatDbsBbsStrat {
 
         System.out.println("Counterexample for Independence for Copeland-alpha-aggregated semantics");
 
-        System.out.println("Argumentation Framework (whole graph): "+exInCope.toString());
-        System.out.println("Cat: "+cat.getModel(exInCope).toString());
+        System.out.println("Argumentation Framework (whole graph): " + exInCope.toString());
+        System.out.println("Cat: " + cat.getModel(exInCope).toString());
         cat.getModel(exInCope).printOrder();
-        System.out.println("Dbs: "+dbs.getModel(exInCope).toString());
-        System.out.println("Bbs: "+bbs.getModel(exInCope).toString());
-        System.out.println("Strat: "+strat.getModel(exInCope).toString());
+        System.out.println("Dbs: " + dbs.getModel(exInCope).toString());
+        System.out.println("Bbs: " + bbs.getModel(exInCope).toString());
+        System.out.println("Strat: " + strat.getModel(exInCope).toString());
         strat.getModel(exInCope).printOrder();
 
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exInCope).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exInCope).toString());
         aggCopeland1.getModel(exInCope).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exInCope).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exInCope).toString());
         aggCopeland05.getModel(exInCope).printOrder();
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exInCope).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exInCope).toString());
         aggCopeland0.getModel(exInCope).printOrder();
 
-        System.out.println("First connected component: "+exInCope1.toString());
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exInCope1).toString());
+        System.out.println("First connected component: " + exInCope1.toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exInCope1).toString());
         aggCopeland1.getModel(exInCope1).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exInCope1).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exInCope1).toString());
         aggCopeland05.getModel(exInCope1).printOrder();
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exInCope1).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exInCope1).toString());
         aggCopeland0.getModel(exInCope1).printOrder();
 
-        System.out.println("Second connected component: "+exInCope2.toString());
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exInCope2).toString());
+        System.out.println("Second connected component: " + exInCope2.toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exInCope2).toString());
         aggCopeland1.getModel(exInCope2).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exInCope2).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exInCope2).toString());
         aggCopeland05.getModel(exInCope2).printOrder();
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exInCope2).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exInCope2).toString());
         aggCopeland0.getModel(exInCope2).printOrder();
 
         System.out.println("\n");
@@ -307,60 +303,60 @@ public class CounterexamplesCatDbsBbsStrat {
         // Test for Borda (counterexample for Borda-1 and Borda-0):
         System.out.println("Test for Borda:");
         System.out.println("Whole graph:");
-        System.out.println("Cat: "+cat.getModel(exInCope).toString());
+        System.out.println("Cat: " + cat.getModel(exInCope).toString());
         cat.getModel(exInCope).printOrder();
-        System.out.println("Dbs: "+dbs.getModel(exInCope).toString());
-        System.out.println("Bbs: "+bbs.getModel(exInCope).toString());
-        System.out.println("Strat: "+strat.getModel(exInCope).toString());
+        System.out.println("Dbs: " + dbs.getModel(exInCope).toString());
+        System.out.println("Bbs: " + bbs.getModel(exInCope).toString());
+        System.out.println("Strat: " + strat.getModel(exInCope).toString());
         strat.getModel(exInCope).printOrder();
 
-        System.out.println("Borda-1: "+aggBorda1.getModel(exInCope).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exInCope).toString());
         aggBorda1.getModel(exInCope).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exInCope).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exInCope).toString());
         aggBorda05.getModel(exInCope).printOrder();
-        System.out.println("Borda-0: "+aggBorda0.getModel(exInCope).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exInCope).toString());
         aggBorda0.getModel(exInCope).printOrder();
 
         System.out.println("First connected component:");
-        System.out.println("Borda-1: "+aggBorda1.getModel(exInCope1).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exInCope1).toString());
         aggBorda1.getModel(exInCope1).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exInCope1).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exInCope1).toString());
         aggBorda05.getModel(exInCope1).printOrder();
-        System.out.println("Borda-0: "+aggBorda0.getModel(exInCope1).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exInCope1).toString());
         aggBorda0.getModel(exInCope1).printOrder();
 
         System.out.println("Second connected component:");
-        System.out.println("Borda-1: "+aggBorda1.getModel(exInCope2).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exInCope2).toString());
         aggBorda1.getModel(exInCope2).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exInCope2).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exInCope2).toString());
         aggBorda05.getModel(exInCope2).printOrder();
-        System.out.println("Borda-0: "+aggBorda0.getModel(exInCope2).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exInCope2).toString());
         aggBorda0.getModel(exInCope2).printOrder();
 
         System.out.println("\n");
 
         System.out.println("Counterexample for Borda:");
-        System.out.println("Argumentation Framework (whole graph): "+exInBorda.toString());
-        System.out.println("Cat: "+cat.getModel(exInBorda).toString());
+        System.out.println("Argumentation Framework (whole graph): " + exInBorda.toString());
+        System.out.println("Cat: " + cat.getModel(exInBorda).toString());
         cat.getModel(exInBorda).printOrder();
-        System.out.println("Dbs: "+dbs.getModel(exInBorda).toString());
-        System.out.println("Bbs: "+bbs.getModel(exInBorda).toString());
-        System.out.println("Strat: "+strat.getModel(exInBorda).toString());
+        System.out.println("Dbs: " + dbs.getModel(exInBorda).toString());
+        System.out.println("Bbs: " + bbs.getModel(exInBorda).toString());
+        System.out.println("Strat: " + strat.getModel(exInBorda).toString());
         strat.getModel(exInBorda).printOrder();
 
-        System.out.println("Borda-1: "+aggBorda1.getModel(exInBorda).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exInBorda).toString());
         aggBorda1.getModel(exInBorda).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exInBorda).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exInBorda).toString());
         aggBorda05.getModel(exInBorda).printOrder();
-        System.out.println("Borda-0: "+aggBorda0.getModel(exInBorda).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exInBorda).toString());
         aggBorda0.getModel(exInBorda).printOrder();
 
-        System.out.println("First connected component: "+exInBorda1.toString());
-        System.out.println("Borda-1: "+aggBorda1.getModel(exInBorda1).toString());
+        System.out.println("First connected component: " + exInBorda1.toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exInBorda1).toString());
         aggBorda1.getModel(exInBorda1).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exInBorda1).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exInBorda1).toString());
         aggBorda05.getModel(exInBorda1).printOrder();
-        System.out.println("Borda-0: "+aggBorda0.getModel(exInBorda1).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exInBorda1).toString());
         aggBorda0.getModel(exInBorda1).printOrder();
 
         System.out.println("\n");
@@ -368,204 +364,204 @@ public class CounterexamplesCatDbsBbsStrat {
 
         System.out.println("Cardinality Precedence:");
         System.out.println("Counterexample for Cardinality Precedence for plurality-aggregated semantics");
-        System.out.println("Argumentation Framework: "+exCPP.toString());
-        System.out.println("Cat: "+cat.getModel(exCPP).toString());
+        System.out.println("Argumentation Framework: " + exCPP.toString());
+        System.out.println("Cat: " + cat.getModel(exCPP).toString());
         cat.getModel(exCPP).printOrder();
-        System.out.println("Dbs: "+dbs.getModel(exCPP).toString());
-        System.out.println("Bbs: "+bbs.getModel(exCPP).toString());
-        System.out.println("Strat: "+strat.getModel(exCPP).toString());
+        System.out.println("Dbs: " + dbs.getModel(exCPP).toString());
+        System.out.println("Bbs: " + bbs.getModel(exCPP).toString());
+        System.out.println("Strat: " + strat.getModel(exCPP).toString());
         strat.getModel(exCPP).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(exCPP).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(exCPP).toString());
 
         System.out.println("\n");
 
         System.out.println("Counterexamples for Cardinality Precedence for Copeland-aggregated semantics, Borda-aggregated semantics and Plurality-aggregated semantics");
-        System.out.println("Argumentation Framework: "+ex2CP.toString());
-        System.out.println("Cat: "+cat.getModel(ex2CP).toString());
+        System.out.println("Argumentation Framework: " + ex2CP.toString());
+        System.out.println("Cat: " + cat.getModel(ex2CP).toString());
         cat.getModel(ex2CP).printOrder();
-        System.out.println("Dbs: "+dbs.getModel(ex2CP).toString());
-        System.out.println("Bbs: "+bbs.getModel(ex2CP).toString());
-        System.out.println("Strat: "+strat.getModel(ex2CP).toString());
+        System.out.println("Dbs: " + dbs.getModel(ex2CP).toString());
+        System.out.println("Bbs: " + bbs.getModel(ex2CP).toString());
+        System.out.println("Strat: " + strat.getModel(ex2CP).toString());
         strat.getModel(ex2CP).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(ex2CP).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(ex2CP).toString());
         aggPlur.getModel(ex2CP).printOrder();
         System.out.println("Copeland");
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(ex2CP).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(ex2CP).toString());
         aggCopeland0.getModel(ex2CP).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(ex2CP).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(ex2CP).toString());
         aggCopeland05.getModel(ex2CP).printOrder();
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(ex2CP).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(ex2CP).toString());
         aggCopeland1.getModel(ex2CP).printOrder();
         System.out.println("Borda:");
-        System.out.println("Borda-0: "+aggBorda0.getModel(ex2CP).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(ex2CP).toString());
         aggBorda0.getModel(ex2CP).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(ex2CP).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(ex2CP).toString());
         aggBorda05.getModel(ex2CP).printOrder();
-        System.out.println("Borda-1: "+aggBorda1.getModel(ex2CP).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(ex2CP).toString());
         aggBorda1.getModel(ex2CP).printOrder();
 
         System.out.println("\n");
 
         System.out.println("Counterexample for Counter-Transitivity for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
-        System.out.println("Argumentation Framework: "+exCT.toString());
-        System.out.println("Cat: "+ cat.getModel(exCT).toString());
+        System.out.println("Argumentation Framework: " + exCT.toString());
+        System.out.println("Cat: " + cat.getModel(exCT).toString());
         cat.getModel(exCT).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exCT).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exCT).toString());
-        System.out.println("Strat: "+ strat.getModel(exCT).toString());
+        System.out.println("Dbs: " + dbs.getModel(exCT).toString());
+        System.out.println("Bbs: " + bbs.getModel(exCT).toString());
+        System.out.println("Strat: " + strat.getModel(exCT).toString());
         strat.getModel(exCT).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(exCT).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(exCT).toString());
         aggPlur.getModel(exCT).printOrder();
         System.out.println("Copeland:");
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exCT).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exCT).toString());
         aggCopeland0.getModel(exCT).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exCT).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exCT).toString());
         aggCopeland05.getModel(exCT).printOrder();
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exCT).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exCT).toString());
         aggCopeland1.getModel(exCT).printOrder();
         System.out.println("Borda:");
-        System.out.println("Borda-0: "+aggBorda0.getModel(exCT).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exCT).toString());
         aggBorda0.getModel(exCT).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exCT).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exCT).toString());
         aggBorda05.getModel(exCT).printOrder();
-        System.out.println("Borda-1: "+aggBorda1.getModel(exCT).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exCT).toString());
         aggBorda1.getModel(exCT).printOrder();
 
         System.out.println("\n");
 
         System.out.println("Counterexample for Strict-Counter-Transitivity for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
-        System.out.println("Argumentation Framework: "+exSCT.toString());
-        System.out.println("Cat: "+ cat.getModel(exSCT).toString());
+        System.out.println("Argumentation Framework: " + exSCT.toString());
+        System.out.println("Cat: " + cat.getModel(exSCT).toString());
         cat.getModel(exSCT).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exSCT).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exSCT).toString());
-        System.out.println("Strat: "+ strat.getModel(exSCT).toString());
+        System.out.println("Dbs: " + dbs.getModel(exSCT).toString());
+        System.out.println("Bbs: " + bbs.getModel(exSCT).toString());
+        System.out.println("Strat: " + strat.getModel(exSCT).toString());
         strat.getModel(exSCT).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(exSCT).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(exSCT).toString());
         aggPlur.getModel(exSCT).printOrder();
         System.out.println("Copeland:");
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exSCT).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exSCT).toString());
         aggCopeland0.getModel(exSCT).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exSCT).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exSCT).toString());
         aggCopeland05.getModel(exSCT).printOrder();
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exSCT).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exSCT).toString());
         aggCopeland1.getModel(exSCT).printOrder();
         System.out.println("Borda:");
-        System.out.println("Borda-0: "+aggBorda0.getModel(exSCT).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exSCT).toString());
         aggBorda0.getModel(exSCT).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exSCT).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exSCT).toString());
         aggBorda05.getModel(exSCT).printOrder();
-        System.out.println("Borda-1: "+aggBorda1.getModel(exSCT).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exSCT).toString());
         aggBorda1.getModel(exSCT).printOrder();
 
         System.out.println("\n");
 
         System.out.println("Counterexample for sigma-Compatibility for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
-        System.out.println("Argumentation Framework: "+exsComp.toString());
-        System.out.println("Cat: "+ cat.getModel(exsComp).toString());
+        System.out.println("Argumentation Framework: " + exsComp.toString());
+        System.out.println("Cat: " + cat.getModel(exsComp).toString());
         cat.getModel(exsComp).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exsComp).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exsComp).toString());
-        System.out.println("Strat: "+ strat.getModel(exsComp).toString());
+        System.out.println("Dbs: " + dbs.getModel(exsComp).toString());
+        System.out.println("Bbs: " + bbs.getModel(exsComp).toString());
+        System.out.println("Strat: " + strat.getModel(exsComp).toString());
         strat.getModel(exsComp).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(exsComp).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(exsComp).toString());
         System.out.println(aggPlur.getModel(exsComp).toString());
         aggPlur.getModel(exsComp).printOrder();
         System.out.println("Copeland:");
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exsComp).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exsComp).toString());
         aggCopeland0.getModel(exsComp).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exsComp).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exsComp).toString());
         aggCopeland05.getModel(exsComp).printOrder();
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exsComp).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exsComp).toString());
         aggCopeland1.getModel(exsComp).printOrder();
 
         System.out.println("Borda:");
-        System.out.println("Borda-0: "+aggBorda0.getModel(exsComp).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exsComp).toString());
         aggBorda0.getModel(exsComp).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exsComp).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exsComp).toString());
         aggBorda05.getModel(exsComp).printOrder();
-        System.out.println("Borda-1: "+aggBorda1.getModel(exsComp).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exsComp).toString());
         aggBorda1.getModel(exsComp).printOrder();
 
         System.out.println("\n");
 
         System.out.println("Counterexample for Self-Contradiction for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
-        System.out.println("Argumentation Framework: "+exSC.toString());
-        System.out.println("Cat: "+ cat.getModel(exSC).toString());
+        System.out.println("Argumentation Framework: " + exSC.toString());
+        System.out.println("Cat: " + cat.getModel(exSC).toString());
         cat.getModel(exSC).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exSC).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exSC).toString());
-        System.out.println("Strat: "+ strat.getModel(exSC).toString());
+        System.out.println("Dbs: " + dbs.getModel(exSC).toString());
+        System.out.println("Bbs: " + bbs.getModel(exSC).toString());
+        System.out.println("Strat: " + strat.getModel(exSC).toString());
         strat.getModel(exSC).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(exSC).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(exSC).toString());
         aggPlur.getModel(exSC).printOrder();
         System.out.println("Copeland:");
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exSC).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exSC).toString());
         aggCopeland0.getModel(exSC).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exSC).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exSC).toString());
         aggCopeland05.getModel(exSC).printOrder();
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exSC).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exSC).toString());
         aggCopeland1.getModel(exSC).printOrder();
         System.out.println("Borda:");
-        System.out.println("Borda-0: "+aggBorda0.getModel(exSC).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exSC).toString());
         aggBorda0.getModel(exSC).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exSC).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exSC).toString());
         aggBorda05.getModel(exSC).printOrder();
-        System.out.println("Borda-1: "+aggBorda1.getModel(exSC).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exSC).toString());
         aggBorda1.getModel(exSC).printOrder();
 
         System.out.println("\n");
 
         System.out.println("Counterexample for Quality-Precedence for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
-        System.out.println("Argumentation Framework: "+exQP.toString());
-        System.out.println("Cat: "+ cat.getModel(exQP).toString());
+        System.out.println("Argumentation Framework: " + exQP.toString());
+        System.out.println("Cat: " + cat.getModel(exQP).toString());
         cat.getModel(exQP).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exQP).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exQP).toString());
-        System.out.println("Strat: "+ strat.getModel(exQP).toString());
+        System.out.println("Dbs: " + dbs.getModel(exQP).toString());
+        System.out.println("Bbs: " + bbs.getModel(exQP).toString());
+        System.out.println("Strat: " + strat.getModel(exQP).toString());
         strat.getModel(exQP).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(exQP).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(exQP).toString());
         aggPlur.getModel(exQP).printOrder();
         System.out.println("Copeland:");
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exQP).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exQP).toString());
         aggCopeland0.getModel(exQP).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exQP).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exQP).toString());
         aggCopeland05.getModel(exQP).printOrder();
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exQP).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exQP).toString());
         aggCopeland1.getModel(exQP).printOrder();
         System.out.println("Borda:");
-        System.out.println("Borda-0: "+aggBorda0.getModel(exQP).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exQP).toString());
         aggBorda0.getModel(exQP).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exQP).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exQP).toString());
         aggBorda05.getModel(exQP).printOrder();
-        System.out.println("Borda-1: "+aggBorda1.getModel(exQP).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exQP).toString());
         aggBorda1.getModel(exQP).printOrder();
 
         System.out.println("\n");
 
         System.out.println("Counterexample for Attack vs Full Defense for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
-        System.out.println("Argumentation Framework: "+exAvsFD.toString());
-        System.out.println("Cat: "+ cat.getModel(exAvsFD).toString());
+        System.out.println("Argumentation Framework: " + exAvsFD.toString());
+        System.out.println("Cat: " + cat.getModel(exAvsFD).toString());
         cat.getModel(exAvsFD).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exAvsFD).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exAvsFD).toString());
-        System.out.println("Strat: "+ strat.getModel(exAvsFD).toString());
+        System.out.println("Dbs: " + dbs.getModel(exAvsFD).toString());
+        System.out.println("Bbs: " + bbs.getModel(exAvsFD).toString());
+        System.out.println("Strat: " + strat.getModel(exAvsFD).toString());
         strat.getModel(exAvsFD).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(exAvsFD).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(exAvsFD).toString());
         aggPlur.getModel(exAvsFD).printOrder();
         System.out.println("Copeland:");
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exAvsFD).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exAvsFD).toString());
         aggCopeland0.getModel(exAvsFD).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exAvsFD).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exAvsFD).toString());
         aggCopeland05.getModel(exAvsFD).printOrder();
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exAvsFD).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exAvsFD).toString());
         aggCopeland1.getModel(exAvsFD).printOrder();
         System.out.println("Borda:");
-        System.out.println("Borda-0: "+aggBorda0.getModel(exAvsFD).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exAvsFD).toString());
         aggBorda0.getModel(exAvsFD).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exAvsFD).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exAvsFD).toString());
         aggBorda05.getModel(exAvsFD).printOrder();
-        System.out.println("Borda-1: "+aggBorda1.getModel(exAvsFD).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exAvsFD).toString());
         aggBorda1.getModel(exAvsFD).printOrder();
 
         System.out.println("\n");
@@ -582,11 +578,11 @@ public class CounterexamplesCatDbsBbsStrat {
         aggBorda05.getModel(exAvsDF1).printOrder();
         aggBorda1.getModel(exAvsDF1).printOrder();
 
-        System.out.println("Cat: "+ cat.getModel(exAvsDF1).toString());
+        System.out.println("Cat: " + cat.getModel(exAvsDF1).toString());
         cat.getModel(exAvsDF1).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exAvsDF1).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exAvsDF1).toString());
-        System.out.println("Strat: "+ strat.getModel(exAvsDF1).toString());
+        System.out.println("Dbs: " + dbs.getModel(exAvsDF1).toString());
+        System.out.println("Bbs: " + bbs.getModel(exAvsDF1).toString());
+        System.out.println("Strat: " + strat.getModel(exAvsDF1).toString());
         strat.getModel(exAvsDF1).printOrder();
 
         System.out.println("Counterexample for Attack vs Full Defense 2? for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
@@ -601,11 +597,11 @@ public class CounterexamplesCatDbsBbsStrat {
         aggBorda05.getModel(exAvsDF2).printOrder();
         aggBorda1.getModel(exAvsDF2).printOrder();
 
-        System.out.println("Cat: "+ cat.getModel(exAvsDF2).toString());
+        System.out.println("Cat: " + cat.getModel(exAvsDF2).toString());
         cat.getModel(exAvsDF2).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exAvsDF2).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exAvsDF2).toString());
-        System.out.println("Strat: "+ strat.getModel(exAvsDF2).toString());
+        System.out.println("Dbs: " + dbs.getModel(exAvsDF2).toString());
+        System.out.println("Bbs: " + bbs.getModel(exAvsDF2).toString());
+        System.out.println("Strat: " + strat.getModel(exAvsDF2).toString());
         strat.getModel(exAvsDF2).printOrder();
 
         System.out.println("Counterexample for Attack vs Full Defense 3 for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
@@ -620,11 +616,11 @@ public class CounterexamplesCatDbsBbsStrat {
         aggBorda05.getModel(exAvsDF3).printOrder();
         aggBorda1.getModel(exAvsDF3).printOrder();
 
-        System.out.println("Cat: "+ cat.getModel(exAvsDF3).toString());
+        System.out.println("Cat: " + cat.getModel(exAvsDF3).toString());
         cat.getModel(exAvsDF3).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exAvsDF3).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exAvsDF3).toString());
-        System.out.println("Strat: "+ strat.getModel(exAvsDF3).toString());
+        System.out.println("Dbs: " + dbs.getModel(exAvsDF3).toString());
+        System.out.println("Bbs: " + bbs.getModel(exAvsDF3).toString());
+        System.out.println("Strat: " + strat.getModel(exAvsDF3).toString());
         strat.getModel(exAvsDF3).printOrder();
 
 
@@ -640,39 +636,39 @@ public class CounterexamplesCatDbsBbsStrat {
         aggBorda05.getModel(exAvsDF4).printOrder();
         aggBorda1.getModel(exAvsDF4).printOrder();
 
-        System.out.println("Cat: "+ cat.getModel(exAvsDF4).toString());
+        System.out.println("Cat: " + cat.getModel(exAvsDF4).toString());
         cat.getModel(exAvsDF4).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exAvsDF4).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exAvsDF4).toString());
-        System.out.println("Strat: "+ strat.getModel(exAvsDF4).toString());
+        System.out.println("Dbs: " + dbs.getModel(exAvsDF4).toString());
+        System.out.println("Bbs: " + bbs.getModel(exAvsDF4).toString());
+        System.out.println("Strat: " + strat.getModel(exAvsDF4).toString());
         strat.getModel(exAvsDF4).printOrder();
 
         //---------------------
         System.out.println("\n");
 
         System.out.println("Counterexample for Argument Equivalence and (Ordinal) Equivalence for Plurality-aggregated, Copeland-aggregated and Borda-aggregated semantics");
-        System.out.println("Argumentation Framework: "+exCT2.toString());
-        System.out.println("Cat: "+ cat.getModel(exCT2).toString());
+        System.out.println("Argumentation Framework: " + exCT2.toString());
+        System.out.println("Cat: " + cat.getModel(exCT2).toString());
         cat.getModel(exCT2).printOrder();
-        System.out.println("Dbs: "+ dbs.getModel(exCT2).toString());
-        System.out.println("Bbs: "+ bbs.getModel(exCT2).toString());
-        System.out.println("Strat: "+ strat.getModel(exCT2).toString());
+        System.out.println("Dbs: " + dbs.getModel(exCT2).toString());
+        System.out.println("Bbs: " + bbs.getModel(exCT2).toString());
+        System.out.println("Strat: " + strat.getModel(exCT2).toString());
         strat.getModel(exCT2).printOrder();
-        System.out.println("Plurality: "+aggPlur.getModel(exCT2).toString());
+        System.out.println("Plurality: " + aggPlur.getModel(exCT2).toString());
         aggPlur.getModel(exCT2).printOrder();
         System.out.println("Copeland:");
-        System.out.println("Copeland-0: "+aggCopeland0.getModel(exCT2).toString());
+        System.out.println("Copeland-0: " + aggCopeland0.getModel(exCT2).toString());
         aggCopeland0.getModel(exCT2).printOrder();
-        System.out.println("Copeland-0.5: "+aggCopeland05.getModel(exCT2).toString());
+        System.out.println("Copeland-0.5: " + aggCopeland05.getModel(exCT2).toString());
         aggCopeland05.getModel(exCT2).printOrder();
-        System.out.println("Copeland-1: "+aggCopeland1.getModel(exCT2).toString());
+        System.out.println("Copeland-1: " + aggCopeland1.getModel(exCT2).toString());
         aggCopeland1.getModel(exCT2).printOrder();
         System.out.println("Borda:");
-        System.out.println("Borda-0: "+aggBorda0.getModel(exCT2).toString());
+        System.out.println("Borda-0: " + aggBorda0.getModel(exCT2).toString());
         aggBorda0.getModel(exCT2).printOrder();
-        System.out.println("Borda-0.5: "+aggBorda05.getModel(exCT2).toString());
+        System.out.println("Borda-0.5: " + aggBorda05.getModel(exCT2).toString());
         aggBorda05.getModel(exCT2).printOrder();
-        System.out.println("Borda-1: "+aggBorda1.getModel(exCT2).toString());
+        System.out.println("Borda-1: " + aggBorda1.getModel(exCT2).toString());
         aggBorda1.getModel(exCT2).printOrder();
 
 
